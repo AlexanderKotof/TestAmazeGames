@@ -44,12 +44,13 @@ namespace GameFeatures.PlayerFeature.Systems
 
             var direction = new Vector3(_inputSystem.Input.x, 0, _inputSystem.Input.y).normalized;
 
+            _player.Transform.rotation = Quaternion.Lerp(_player.Transform.rotation, Quaternion.LookRotation(direction), _rotationSpeed);
+
             var desiredDestination = direction + _player.Position;
             if (!_movingBounds.Contains(desiredDestination))
                 return;
 
             _player.Transform.Translate(direction * _movementSpeed * Time.deltaTime, Space.World);
-            _player.Transform.rotation = Quaternion.Lerp(_player.Transform.rotation, Quaternion.LookRotation(direction), _rotationSpeed);
         }
     }
 }
