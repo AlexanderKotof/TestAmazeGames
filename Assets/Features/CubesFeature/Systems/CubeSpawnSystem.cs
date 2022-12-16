@@ -17,6 +17,8 @@ namespace GameFeatures.CubesFeature.Systems
 
         public List<CubeComponent> Cubes { get; private set; }
 
+        private const float _minDistanceToAnotherCube = 1f;
+
         public CubeSpawnSystem(CubeComponent cubePrefab, Bounds spawnBounds, float spawnRate, int preSpawnCount, int maxCubesCount)
         {
             _cubePrefab = cubePrefab;
@@ -44,7 +46,7 @@ namespace GameFeatures.CubesFeature.Systems
         {
             _timer += Time.deltaTime;
 
-            if (Cubes.Count > _maxCubesCount)
+            if (Cubes.Count >= _maxCubesCount)
                 return;
 
             if (_timer < 1 / _spawnRate)
@@ -56,16 +58,48 @@ namespace GameFeatures.CubesFeature.Systems
 
         private void SpawnCube()
         {
-            var position = _spawnBounds.min + _spawnBounds.max * Random.value;
+            var position = CalculatePositionAndCheck();
             var rotation = Quaternion.Euler(0, Random.Range(0, 180), 0);
             var cube = CubeComponent.Instantiate(_cubePrefab, position, rotation);
             Cubes.Add(cube);
         }
 
+        private Vector3 CalculatePositionAndCheck()
+        {
+            var position = CalculateRandomPosition();
+            var distanceChecked = false;
+
+            while (!distanceChecked)
+            {
+                distanceChecked = true;
+                foreach (var cube in Cubes)
+                {
+                    var sqrDistance = (cube.Position - position).sqrMagnitude;
+                    if (sqrDistance < _minDistanceToAnotherCube * _minDistanceToAnotherCube)
+                    {
+                        position = CalculateRandomPosition();
+                        distanceChecked = false;
+                        break;
+                    }
+                }
+            }
+
+            return position;
+        }
+
+        private Vector3 CalculateRandomPosition()
+        {
+            var position = new Vector3(_spawnBounds.extents.x * 2 * Random.value,
+                                       _spawnBounds.extents.y * 2 * Random.value,
+                                       _spawnBounds.extents.z * 2 * Random.value);
+            position += _spawnBounds.min;
+            return position;
+        }
+
         public void DespawnCube(CubeComponent cube)
         {
             Cubes.Remove(cube);
-            CubeComponent.Destroy(cube);
+            CubeComponent.Destroy(cube.gameObject);
         }
     }
 }

@@ -17,6 +17,8 @@ namespace GameFeatures.CubesFeature.Systems
 
         private bool _cubePicked;
 
+        private DropPointComponent _dropPoint;
+
         public PickAndDropCubeSystem(DropPointComponent dropPointPrefab, Vector3 dropPointPosition, float collectDistance, float dropDistance)
         {
             _dropPointPrefab = dropPointPrefab;
@@ -35,12 +37,14 @@ namespace GameFeatures.CubesFeature.Systems
 
         private void SpawnDropPoint()
         {
-            Object.Instantiate(_dropPointPrefab, _dropPointPosition, Quaternion.identity);
+            _dropPoint = DropPointComponent.Instantiate(_dropPointPrefab, _dropPointPosition, Quaternion.identity);
         }
 
         public void Destroy()
         {
-
+            _cubeSpawnSystem = null;
+            _playerSpawnSystem = null;
+            DropPointComponent.Destroy(_dropPoint.gameObject);
         }
 
         public void Update()
@@ -56,6 +60,7 @@ namespace GameFeatures.CubesFeature.Systems
                         continue;
 
                     _cubePicked = true;
+                    player.PickUpCube();
                     _cubeSpawnSystem.DespawnCube(cube);
                     break;
                 }
@@ -66,8 +71,8 @@ namespace GameFeatures.CubesFeature.Systems
 
                 if (dropPointSqrDistance < _dropDistance * _dropDistance)
                 {
-                    // Drop Cube
                     _cubePicked = false;
+                    player.DropCube();
                 }
             }
         }

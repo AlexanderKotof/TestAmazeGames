@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b353ace828786f248b5b0a30eaafa988, type: 3}
   m_Name: CubesFeature
   m_EditorClassIdentifier: 
-  _cubePrefab: {fileID: 8749567902935384918, guid: 0de7d7beae430e940971a7935584a59c, type: 3}
+  _cubePrefab: {fileID: 6643553613956150377, guid: 0de7d7beae430e940971a7935584a59c, type: 3}
   _dropPointPrefab: {fileID: 8099810704975600945, guid: ae1bae6704b2d2b4c920a033de4ca400, type: 3}
-  _dropPointPosition: {x: 23, y: 0, z: 0}
+  _dropPointPosition: {x: 7.5, y: 0, z: 0}
   _spawnBounds:
-    m_Center: {x: 0, y: 1, z: 0}
-    m_Extent: {x: 20, y: 0, z: 10}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 7, y: 0, z: 5}
   _preSpawnCount: 5
   _maxCubesCount: 10
-  _spawnRate: 5
+  _spawnRate: 0.5
   _collectDistance: 1
   _dropDistance: 1
