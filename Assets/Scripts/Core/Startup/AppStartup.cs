@@ -8,6 +8,8 @@ namespace Core.Startup
         private AppStateMachine _stateMachine;
         private void Start()
         {
+            DontDestroyOnLoad(this);
+
             _stateMachine = new AppStateMachine();
             _stateMachine.StartGame();
         }
