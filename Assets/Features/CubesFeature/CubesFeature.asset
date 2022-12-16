@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CubesFeature
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: 6643553613956150377, guid: 0de7d7beae430e940971a7935584a59c, type: 3}
-  _dropPointPrefab: {fileID: 8099810704975600945, guid: ae1bae6704b2d2b4c920a033de4ca400, type: 3}
+  _dropPointPrefab: {fileID: 2126472349743110284, guid: 8d280c336cfa82046abcbad0f0126728, type: 3}
   _dropPointPosition: {x: 7.5, y: 0, z: 0}
   _spawnBounds:
     m_Center: {x: 0, y: 0, z: 0}
