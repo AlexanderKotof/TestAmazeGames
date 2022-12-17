@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 8937928292216930208}
-  MovementRange: 100
+  MovementRange: 50
 --- !u!1 &2413225569917568084
 GameObject:
   m_ObjectHideFlags: 0
