@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UI.Components
 {
-    public class JoystickComponent : MonoBehaviour, IDragHandler, IPointerUpHandler
+    public class JoystickComponent : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         public Transform joystick;
 
@@ -27,7 +27,7 @@ namespace UI.Components
             UpdateInput(delta);
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnEndDrag(PointerEventData eventData)
         {
             joystick.transform.position = _startPos;
             UpdateInput(Vector3.zero);
