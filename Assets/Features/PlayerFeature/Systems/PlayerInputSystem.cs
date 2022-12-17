@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameFeatures.PlayerFeature.Systems
 {
-    public class PlayerInputSystem : ISystem, ISystemUpdate
+    public class PlayerInputSystem : ISystem
     {
         public Vector2 Input { get; private set; }
 
@@ -20,11 +20,6 @@ namespace GameFeatures.PlayerFeature.Systems
         public void Destroy()
         {
             Input = Vector2.zero;
-        }
-
-        public void Update()
-        {
-            SetInput(new Vector2(UnityEngine.Input.GetAxis("Horizontal"), UnityEngine.Input.GetAxis("Vertical")));
         }
     }
 }
