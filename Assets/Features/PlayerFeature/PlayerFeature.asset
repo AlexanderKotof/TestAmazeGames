@@ -15,6 +15,7 @@ MonoBehaviour:
   _playerPrefab: {fileID: 5352551448851907937, guid: 9cde0d41c237619449992810b9d06d2d, type: 3}
   _movingBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 9, y: 0, z: 8}
+    m_Extent: {x: 8.5, y: 0, z: 7}
   _spawnPosition: {x: 0, y: 0, z: 0}
   _movementSpeed: 4
+  _rotationSpeed: 1
