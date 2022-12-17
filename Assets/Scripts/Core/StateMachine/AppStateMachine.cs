@@ -12,7 +12,7 @@ namespace Core.StateMachine
 
         private readonly GameState _loadedState = new GameState("Loaded");
 
-        public async void StartGame()
+        public async Task StartGame()
         {
             await SetState(new LoadGameScene());
             await SetState(new InitializeFeaturesState(Features.GetFeatures()));
