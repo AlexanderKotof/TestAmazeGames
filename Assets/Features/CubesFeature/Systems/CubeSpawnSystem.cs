@@ -19,6 +19,8 @@ namespace GameFeatures.CubesFeature.Systems
 
         private const float _minDistanceToAnotherCube = 1f;
 
+        private Transform _cubeParent;
+
         public CubeSpawnSystem(CubeComponent cubePrefab, Bounds spawnBounds, float spawnRate, int preSpawnCount, int maxCubesCount)
         {
             _cubePrefab = cubePrefab;
@@ -33,13 +35,21 @@ namespace GameFeatures.CubesFeature.Systems
 
         public void Destroy()
         {
-            
+            GameObject.Destroy(_cubeParent.gameObject);
+            Cubes.Clear();
         }
 
         public void Initialize()
         {
+            SpawnCubeParent();
+
             for (int i = 0; i < _preSpawnCount; i++)
                 SpawnCube();
+        }
+
+        private void SpawnCubeParent()
+        {
+            _cubeParent = new GameObject("CubeParent").transform;
         }
 
         public void Update()
@@ -60,7 +70,7 @@ namespace GameFeatures.CubesFeature.Systems
         {
             var position = CalculatePositionAndCheck();
             var rotation = Quaternion.Euler(0, Random.Range(0, 180), 0);
-            var cube = CubeComponent.Instantiate(_cubePrefab, position, rotation);
+            var cube = GameObject.Instantiate(_cubePrefab, position, rotation, _cubeParent);
             Cubes.Add(cube);
         }
 
@@ -99,7 +109,7 @@ namespace GameFeatures.CubesFeature.Systems
         public void DespawnCube(CubeComponent cube)
         {
             Cubes.Remove(cube);
-            CubeComponent.Destroy(cube.gameObject);
+            GameObject.Destroy(cube.gameObject);
         }
     }
 }
