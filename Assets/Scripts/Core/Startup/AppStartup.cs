@@ -13,9 +13,12 @@ namespace Core.Startup
         {
             DontDestroyOnLoad(this);
 
+            var loadingScreen = ScreensManager.ShowScreen<LoadingScreen>();
+
             _stateMachine = new AppStateMachine();
             await _stateMachine.StartGame();
 
+            loadingScreen.Hide();
             ScreensManager.ShowScreen<ControlScreen>();
         }
     }
